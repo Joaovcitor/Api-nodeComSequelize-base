@@ -2,10 +2,13 @@
   "name": "api-nodecomsequelize-base",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
+    "test": "cross-env NODE_ENV=test concurrently \"./node_modules/.bin/mocha\" \"nodemon index.js\"",
+    "start": "nodemon index.js",
+    "migrate:dev": "npx sequelize-cli db:migrate",
+    "migrate:test": "NODE_ENV=test npx sequelize-cli db:migrate",
+    "migrate:prod": "NODE_ENV=production npx sequelize-cli db:migrate",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -45,6 +48,7 @@
     "mocha": "^10.7.3",
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
+    "sequelize-cli": "^6.6.2",
     "supertest": "^7.0.0"
   }
 }

@@ -1,16 +1,28 @@
-import { config } from "dotenv";
-import { Sequelize } from "sequelize";
+require("dotenv").config({
+  path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env'
+});
 
-config()
-
-export const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_USER, process.env.DATABASE_PASSWORD, {
-  host: process.env.DATABASE_HOST,
-  dialect: process.env.DATABASE_DIALECT,
-})
-
-try {
-  await sequelize.authenticate();
-  console.log('Connection has been established successfully.');
-} catch (error) {
-  console.error('Unable to connect to the database:', error);
-}
+module.exports = {
+  development: {
+    username: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || null,
+    database: process.env.DB_NAME || "database_development",
+    host: process.env.DB_HOST || "localhost",
+    dialect: process.env.DB_DIALECT || "mariadb",
+  },
+  test: {
+    username: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || null,
+    database: "database_test",
+    host: process.env.DB_HOST || "localhost",
+    dialect: "sqlite",
+    storage: ":memory"
+  },
+  production: {
+    username: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || null,
+    database: "database_production",
+    host: process.env.DB_HOST || "localhost",
+    dialect: "mariadb",
+  },
+};

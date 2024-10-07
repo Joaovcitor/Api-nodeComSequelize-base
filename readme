@@ -1,0 +1,3 @@
+Essa base está configurada para utilizar DB sqlite3, caso queira outro DB, instale o de sua preferência.
+
+Configurei para usar tanto migrations quanto apenas sync()
