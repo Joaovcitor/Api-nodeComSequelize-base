@@ -1,28 +1,28 @@
-require("dotenv").config({
-  path: process.env.NODE_ENV === 'production' ? '.env.production' : '.env'
-});
+import dotenv from 'dotenv';
 
-module.exports = {
+const env = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.dev';
+dotenv.config({ path: env });
+
+export default {
   development: {
-    username: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || null,
-    database: process.env.DB_NAME || "database_development",
-    host: process.env.DB_HOST || "localhost",
-    dialect: process.env.DB_DIALECT || "mariadb",
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    host: process.env.DB_HOST,
+    dialect: 'mariadb'
   },
   test: {
-    username: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || null,
-    database: "database_test",
-    host: process.env.DB_HOST || "localhost",
-    dialect: "sqlite",
-    storage: ":memory"
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE_TEST,
+    host: process.env.DB_HOST,
+    dialect: 'mariadb'
   },
   production: {
-    username: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || null,
-    database: "database_production",
-    host: process.env.DB_HOST || "localhost",
-    dialect: "mariadb",
-  },
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE_PROD,
+    host: process.env.DB_HOST,
+    dialect: 'mariadb'
+  }
 };

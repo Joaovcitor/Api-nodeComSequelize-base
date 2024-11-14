@@ -1,5 +1,5 @@
 import express from 'express';
-import { sequelize } from './src/config/db.js';
+// import { sequelize } from './src/config/db.js';
 import session from 'express-session';
 import FileStore from 'session-file-store';
 import cookieParser from 'cookie-parser';

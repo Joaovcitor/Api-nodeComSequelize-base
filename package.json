@@ -2,10 +2,11 @@
   "name": "api-nodecomsequelize-base",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "test": "cross-env NODE_ENV=test concurrently \"./node_modules/.bin/mocha\" \"nodemon index.js\"",
-    "start": "nodemon index.js",
+    "start": "cross-env NODE_ENV=production nodemon server.js",
+    "start:dev": "cross-env NODE_ENV=dev nodemon server.js",
     "migrate:dev": "npx sequelize-cli db:migrate",
     "migrate:test": "NODE_ENV=test npx sequelize-cli db:migrate",
     "migrate:prod": "NODE_ENV=production npx sequelize-cli db:migrate",
@@ -36,6 +37,12 @@
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
+    "@babel/cli": "^7.25.9",
+    "@babel/core": "^7.26.0",
+    "@babel/plugin-transform-runtime": "^7.25.9",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/register": "^7.25.9",
+    "@babel/runtime": "^7.26.0",
     "@eslint/js": "^9.11.1",
     "concurrently": "^9.0.1",
     "cross-env": "^7.0.3",
